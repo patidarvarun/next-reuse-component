@@ -1,90 +1,22 @@
-import React, { Component } from "react";
+import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import ButtonComponent from "./ButtonComponent";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Image from "next/image";
+import TextField from "@mui/material/TextField";
 
-const SideNavBar = () => {
-  const isMenuOpen = Boolean();
-  const isMobileMenuOpen = Boolean();
-  const handleProfileMenuOpen = (event) => {};
-
-  const handleMobileMenuClose = () => {};
-
-  const handleMenuClose = () => {
-    handleMobileMenuClose();
+export default function SideNavBar() {
+  const handleChange = () => {
+    window.location.replace("/");
   };
-
-  const handleMobileMenuOpen = (event) => {};
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    ></Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <ButtonComponent name="Sign In" />
-      </MenuItem>
-    </Menu>
-  );
-
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -94,32 +26,90 @@ const SideNavBar = () => {
               size="large"
               edge="start"
               color="inherit"
-              aria-label="open drawer"
+              aria-label="menu"
               sx={{ mr: 2 }}
+              onClick={handleChange}
             >
               <MenuIcon />
             </IconButton>
-
-            <Typography variant="h5" color="inherit" component="div">
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Good Afternoon
             </Typography>
-
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <ButtonComponent
-                name="Sign In"
-                color="white"
-                type={"Submit"}
-                // handleClick={handleSubmit}
-              />
-            </Box>
+            <ButtonComponent
+              name="Sign In"
+              color="white"
+              type={"Submit"}
+              // handleClick={handleSubmit}
+            />
           </Toolbar>
         </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
       </Box>
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        <nav aria-label="secondary mailbox folders">
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText primary="Account Page" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#simple-list">
+                <ListItemText primary="Grid List" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText primary="Form & Inputs" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#simple-list">
+                <ListItemText primary="Product Grid" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText primary="Cart" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#simple-list">
+                <ListItemText primary="Checkout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </nav>
+      </Box>
+      <Image
+        src="/navbarImage.png"
+        width="400px"
+        height="200px"
+        alt="imagg"
+      ></Image>
+      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        Summer Collection
+      </Typography>
+      <br />
+      <Typography
+        style={{ color: "grey" }}
+        variant="body1"
+        component="div"
+        sx={{ flexGrow: 1 }}
+      >
+        Search
+      </Typography>
+
+      <TextField
+        style={{
+          borderBottom: "1px solid black !important",
+          width: "23.5em !important",
+          background: "none !important",
+        }}
+        id="filled-search"
+        label="Search anything ...."
+        type="search"
+        variant="filled"
+      />
     </div>
   );
-};
-
-export default SideNavBar;
+}
